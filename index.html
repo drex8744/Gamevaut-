@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GameVault Marketplace</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f6fb;
+  color: #17172b;
+}
+
+/* HEADER */
+header {
+  height: 70px;
+  background: white;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #5b3df5;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  background: #5b3df5;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav {
+  display: flex;
+  gap: 10px;
+}
+
+nav button {
+  border: none;
+  background: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.primary {
+  background: #5b3df5 !important;
+  color: white;
+  border-radius: 8px;
+}
+
+/* PAGES */
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+/* HOME */
+.hero {
+  text-align: center;
+  padding: 60px 20px 35px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.hero h1 span {
+  color: #5b3df5;
+}
+
+.hero p {
+  color: #777;
+  margin-bottom: 25px;
+}
+
+.hero button {
+  padding: 14px 25px;
+  border: none;
+  border-radius: 10px;
+  background: #5b3df5;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* MARKETPLACE */
+.market {
+  max-width: 1100px;
+  margin: auto;
+  padding: 25px 20px;
+}
+
+.market-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 15px;
+}
+
+.search {
+  padding: 12px;
+  width: 260px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.listings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.listing {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,.06);
+}
+
+.listing img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  background: #eee;
+}
+
+.listing-body {
+  padding: 18px;
+}
+
+.listing-body h3 {
+  margin-bottom: 8px;
+}
+
+.game {
+  color: #5b3df5;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.price {
+  font-size: 21px;
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+.seller {
+  color: #777;
+  font-size: 13px;
+}
+
+.view-btn {
+  width: 100%;
+  padding: 11px;
+  border: none;
+  border-radius: 8px;
+  background: #5b3df5;
+  color: white;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+/* FORM */
+.form-container {
+  max-width: 550px;
+  margin: 45px auto;
+  padding: 25px;
+}
+
+.form-card {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.07);
+}
+
+.form-card h2 {
+  margin-bottom: 8px;
+}
+
+.form-card p {
+  color: #777;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 7px;
+  font-size: 14px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #d9dbe4;
+  border-radius: 9px;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 9px;
+  background: #5b3df5;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.switch {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.switch span {
+  color: #5b3df5;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* DASHBOARD */
+.dashboard {
+  max-width: 1000px;
+  margin: 35px auto;
+  padding: 20px;
+}
+
+.dashboard-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.dashboard-card h2 {
+  margin-bottom: 10px;
+}
+
+.sell-btn {
+  background: #5b3df5;
+  color: white;
+  border: none;
+  padding: 13px 20px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* EMPTY */
+.empty {
+  text-align: center;
+  padding: 50px;
+  color: #777;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+
+.modal-content {
+  background: white;
+  max-width: 500px;
+  width: 100%;
+  padding: 25px;
+  border-radius: 15px;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+/* MOBILE */
+@media(max-width: 750px) {
+  .listings {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .market-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  nav button {
+    padding: 8px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    <div class="logo-icon">🎮</div>
+    GameVault
+  </div>
+
+  <nav>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('marketplace')">Marketplace</button>
+    <button id="dashboardBtn" onclick="showPage('dashboard')"
+            style="display:none;">Dashboard</button>
+    <button id="loginBtn" class="primary" onclick="showPage('login')">
+      Login
+    </button>
+  </nav>
+
+</header>
+
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+  <div class="hero">
+
+    <h1>Buy & Sell <span>Gaming Accounts</span></h1>
+
+    <p>
+      Find gaming accounts from sellers around the world.
+    </p>
+
+    <button onclick="showPage('marketplace')">
+      Browse Accounts
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- MARKETPLACE -->
+<section id="marketplace" class="page">
+
+  <div class="market">
+
+    <div class="market-header">
+
+      <div>
+        <h1>Marketplace</h1>
+        <p>Gaming accounts available for sale.</p>
+      </div>
+
+      <input
+        class="search"
+        id="search"
+        placeholder="Search accounts..."
+        oninput="displayListings()"
+      >
+
+    </div>
+
+    <div class="listings" id="listings"></div>
+
+  </div>
+
+</section>
+
+
+<!-- LOGIN -->
+<section id="login" class="page">
+
+  <div class="form-container">
+
+    <div class="form-card">
+
+      <h2>Welcome back</h2>
+
+      <p>Login to your GameVault account.</p>
+
+      <div class="form-group">
+
+        <label>Email</label>
+
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="you@example.com"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Password</label>
+
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Your password"
+        >
+
+      </div>
+
+      <button class="form-button" onclick="login()">
+        Login
+      </button>
+
+      <div class="switch">
+        Don't have an account?
+        <span onclick="showPage('register')">Create one</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- REGISTER -->
+<section id="register" class="page">
+
+  <div class="form-container">
+
+    <div class="form-card">
+
+      <h2>Create account</h2>
+
+      <p>Join GameVault and start selling gaming accounts.</p>
+
+      <div class="form-group">
+
+        <label>Username</label>
+
+        <input
+          type="text"
+          id="registerName"
+          placeholder="Andre Gaming"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Email</label>
+
+        <input
+          type="email"
+          id="registerEmail"
+          placeholder="you@example.com"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Password</label>
+
+        <input
+          type="password"
+          id="registerPassword"
+          placeholder="Create a password"
+        >
+
+      </div>
+
+      <button class="form-button" onclick="register()">
+        Create Account
+      </button>
+
+      <div class="switch">
+        Already have an account?
+        <span onclick="showPage('login')">Login</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="page">
+
+  <div class="dashboard">
+
+    <div class="dashboard-card">
+
+      <h2 id="welcome"></h2>
+
+      <p>
+        Manage your GameVault account and listings.
+      </p>
+
+      <br>
+
+      <button class="sell-btn" onclick="showPage('sell')">
+        + Sell an Account
+      </button>
+
+    </div>
+
+    <div class="dashboard-card">
+
+      <h2>Your Listings</h2>
+
+      <div id="myListings"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SELL -->
+<section id="sell" class="page">
+
+  <div class="form-container">
+
+    <div class="form-card">
+
+      <h2>Sell an Account</h2>
+
+      <p>Create a listing for your gaming account.</p>
+
+      <div class="form-group">
+
+        <label>Game</label>
+
+        <select id="sellGame">
+
+          <option value="eFootball">eFootball</option>
+          <option value="EA Sports FC">EA Sports FC</option>
+          <option value="Call of Duty">Call of Duty</option>
+          <option value="Free Fire">Free Fire</option>
+          <option value="PUBG">PUBG</option>
+
+        </select>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Account title</label>
+
+        <input
+          id="sellTitle"
+          placeholder="eFootball account - Epic players"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Price (₦)</label>
+
+        <input
+          type="number"
+          id="sellPrice"
+          placeholder="150000"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Platform</label>
+
+        <select id="sellPlatform">
+
+          <option>Android</option>
+          <option>iPhone</option>
+          <option>PlayStation</option>
+          <option>Xbox</option>
+          <option>PC</option>
+
+        </select>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Description</label>
+
+        <textarea
+          id="sellDescription"
+          placeholder="Describe the account..."
+        ></textarea>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Account image</label>
+
+        <input
+          type="file"
+          id="sellImage"
+          accept="image/*"
+        >
+
+      </div>
+
+      <button class="form-button" onclick="createListing()">
+        Post Account
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- LISTING MODAL -->
+<div class="modal" id="modal">
+
+  <div class="modal-content">
+
+    <span class="close" onclick="closeModal()">×</span>
+
+    <div id="modalContent"></div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+let currentUser =
+  JSON.parse(localStorage.getItem("currentUser")) || null;
+
+let users =
+  JSON.parse(localStorage.getItem("users")) || [];
+
+let listings =
+  JSON.parse(localStorage.getItem("listings")) || [];
+
+
+/* PAGE NAVIGATION */
+
+function showPage(page) {
+
+  document.querySelectorAll(".page").forEach(function(p) {
+    p.classList.remove("active");
+  });
+
+  document.getElementById(page).classList.add("active");
+
+  if (page === "marketplace") {
+    displayListings();
+  }
+
+  if (page === "dashboard") {
+
+    if (!currentUser) {
+      showPage("login");
+      return;
+    }
+
+    updateDashboard();
+  }
+
+}
+
+
+/* REGISTER */
+
+function register() {
+
+  const name =
+    document.getElementById("registerName").value.trim();
+
+  const email =
+    document.getElementById("registerEmail").value.trim();
+
+  const password =
+    document.getElementById("registerPassword").value;
+
+  if (!name || !email || !password) {
+
+    alert("Please fill in all fields.");
+
+    return;
+  }
+
+  const exists =
+    users.find(user => user.email === email);
+
+  if (exists) {
+
+    alert("An account with this email already exists.");
+
+    return;
+  }
+
+  const user = {
+    id: Date.now(),
+    name: name,
+    email: email,
+    password: password
+  };
+
+  users.push(user);
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  currentUser = user;
+
+  localStorage.setItem(
+    "currentUser",
+    JSON.stringify(currentUser)
+  );
+
+  alert("Account created successfully!");
+
+  updateHeader();
+
+  showPage("dashboard");
+}
+
+
+/* LOGIN */
+
+function login() {
+
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  const user =
+    users.find(
+      u => u.email === email && u.password === password
+    );
+
+  if (!user) {
+
+    alert("Incorrect email or password.");
+
+    return;
+  }
+
+  currentUser = user;
+
+  localStorage.setItem(
+    "currentUser",
+    JSON.stringify(user)
+  );
+
+  updateHeader();
+
+  alert("Login successful!");
+
+  showPage("dashboard");
+}
+
+
+/* HEADER */
+
+function updateHeader() {
+
+  const loginBtn =
+    document.getElementById("loginBtn");
+
+  const dashboardBtn =
+    document.getElementById("dashboardBtn");
+
+  if (currentUser) {
+
+    loginBtn.textContent = "Logout";
+
+    loginBtn.onclick = logout;
+
+    dashboardBtn.style.display = "block";
+
+  } else {
+
+    loginBtn.textContent = "Login";
+
+    loginBtn.onclick = function() {
+      showPage("login");
+    };
+
+    dashboardBtn.style.display = "none";
+  }
+
+}
+
+
+/* LOGOUT */
+
+function logout() {
+
+  currentUser = null;
+
+  localStorage.removeItem("currentUser");
+
+  updateHeader();
+
+  showPage("home");
+}
+
+
+/* CREATE LISTING */
+
+function createListing() {
+
+  if (!currentUser) {
+
+    alert("Please login first.");
+
+    showPage("login");
+
+    return;
+  }
+
+  const game =
+    document.getElementById("sellGame").value;
+
+  const title =
+    document.getElementById("sellTitle").value.trim();
+
+  const price =
+    document.getElementById("sellPrice").value;
+
+  const platform =
+    document.getElementById("sellPlatform").value;
+
+  const description =
+    document.getElementById("sellDescription").value.trim();
+
+  const imageInput =
+    document.getElementById("sellImage");
+
+  if (!title || !price || !description) {
+
+    alert("Please complete the listing.");
+
+    return;
+  }
+
+
+  /* Convert image to Base64 */
+
+  if (imageInput.files.length > 0) {
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+
+      saveListing(
+        game,
+        title,
+        price,
+        platform,
+        description,
+        e.target.result
+      );
+
+    };
+
+    reader.readAsDataURL(imageInput.files[0]);
+
+  } else {
+
+    saveListing(
+      game,
+      title,
+      price,
+      platform,
+      description,
+      ""
+    );
+
+  }
+
+}
+
+
+/* SAVE LISTING */
+
+function saveListing(
+  game,
+  title,
+  price,
+  platform,
+  description,
+  image
+) {
+
+  const listing = {
+
+    id: Date.now(),
+
+    game: game,
+
+    title: title,
+
+    price: price,
+
+    platform: platform,
+
+    description: description,
+
+    image: image,
+
+    seller: currentUser.name,
+
+    sellerId: currentUser.id
+
+  };
+
+  listings.unshift(listing);
+
+  localStorage.setItem(
+    "listings",
+    JSON.stringify(listings)
+  );
+
+  alert("Your account has been posted!");
+
+  clearSellForm();
+
+  showPage("marketplace");
+
+}
+
+
+/* MARKETPLACE */
+
+function displayListings() {
+
+  const container =
+    document.getElementById("listings");
+
+  const search =
+    document.getElementById("search").value.toLowerCase();
+
+  const filtered =
+    listings.filter(function(item) {
+
+      return (
+        item.title.toLowerCase().includes(search) ||
+        item.game.toLowerCase().includes(search) ||
+        item.platform.toLowerCase().includes(search)
+      );
+
+    });
+
+
+  if (filtered.length === 0) {
+
+    container.innerHTML = `
+      <div class="empty">
+        <h2>No accounts found</h2>
+        <p>Be the first person to post an account.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  container.innerHTML = filtered.map(function(item) {
+
+    const image =
+      item.image ||
+      "https://via.placeholder.com/500x300?text=Gaming+Account";
+
+    return `
+
+      <div class="listing">
+
+        <img src="${image}">
+
+        <div class="listing-body">
+
+          <div class="game">
+            ${item.game}
+          </div>
+
+          <h3>${item.title}</h3>
+
+          <div class="price">
+            ₦${Number(item.price).toLocaleString()}
+          </div>
+
+          <div class="seller">
+            👤 ${item.seller}
+            <br>
+            🎮 ${item.platform}
+          </div>
+
+          <button
+            class="view-btn"
+            onclick="viewListing(${item.id})"
+          >
+            View Account
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }).join("");
+
+}
+
+
+/* VIEW LISTING */
+
+function viewListing(id) {
+
+  const item =
+    listings.find(listing => listing.id === id);
+
+  if (!item) return;
+
+  document.getElementById("modalContent").innerHTML = `
+
+    <h2>${item.title}</h2>
+
+    <br>
+
+    <p><strong>Game:</strong> ${item.game}</p>
+
+    <p><strong>Platform:</strong> ${item.platform}</p>
+
+    <p><strong>Price:</strong>
+      ₦${Number(item.price).toLocaleString()}
+    </p>
+
+    <p><strong>Seller:</strong> ${item.seller}</p>
+
+    <br>
+
+    <p>${item.description}</p>
+
+    <br>
+
+    <button
+      class="form-button"
+      onclick="contactSeller('${item.seller}')"
+    >
+      Contact Seller
+    </button>
+
+  `;
+
+  document.getElementById("modal").style.display = "flex";
+}
+
+
+/* CLOSE MODAL */
+
+function closeModal() {
+
+  document.getElementById("modal").style.display = "none";
+
+}
+
+
+/* DASHBOARD */
+
+function updateDashboard() {
+
+  document.getElementById("welcome").textContent =
+    "Welcome, " + currentUser.name + "!";
+
+  const container =
+    document.getElementById("myListings");
+
+  const mine =
+    listings.filter(
+      item => item.sellerId === currentUser.id
+    );
+
+  if (mine.length === 0) {
+
+    container.innerHTML = `
+      <p style="color:#777;">
+        You haven't posted any accounts yet.
+      </p>
+    `;
+
+    return;
+  }
+
+  container.innerHTML = mine.map(function(item) {
+
+    return `
+
+      <div style="
+        padding:15px 0;
+        border-bottom:1px solid #eee;
+      ">
+
+        <strong>${item.title}</strong>
+
+        <br>
+
+        ₦${Number(item.price).toLocaleString()}
+
+        <br><br>
+
+        <button
+          onclick="deleteListing(${item.id})"
+          style="
+            border:none;
+            background:#e53935;
+            color:white;
+            padding:8px 12px;
+            border-radius:6px;
+            cursor:pointer;
+          "
+        >
+          Delete
+        </button>
+
+      </div>
+
+    `;
+
+  }).join("");
+
+}
+
+
+/* DELETE */
+
+function deleteListing(id) {
+
+  if (!confirm("Delete this listing?")) return;
+
+  listings =
+    listings.filter(item => item.id !== id);
+
+  localStorage.setItem(
+    "listings",
+    JSON.stringify(listings)
+  );
+
+  updateDashboard();
+
+}
+
+
+/* CONTACT */
+
+function contactSeller(name) {
+
+  alert(
+    "Contact system coming next. Seller: " + name
+  );
+
+}
+
+
+/* CLEAR FORM */
+
+function clearSellForm() {
+
+  document.getElementById("sellTitle").value = "";
+
+  document.getElementById("sellPrice").value = "";
+
+  document.getElementById("sellDescription").value = "";
+
+  document.getElementById("sellImage").value = "";
+
+}
+
+
+/* START */
+
+updateHeader();
+
+displayListings();
+
+</script>
+
+</body>
+</html>
+
